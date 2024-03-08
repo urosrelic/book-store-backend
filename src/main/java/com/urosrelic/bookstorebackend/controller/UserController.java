@@ -25,10 +25,9 @@ public class UserController {
     @GetMapping
     public ResponseEntity<List<User>> getUsers() {
         List<User> users = userRepo.findAll();
-        if(users != null) {
+        if (!users.isEmpty()) {
             return new ResponseEntity<>(users, HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 }
