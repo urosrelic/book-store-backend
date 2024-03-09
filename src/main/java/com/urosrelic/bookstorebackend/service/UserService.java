@@ -19,7 +19,17 @@ public class UserService {
         this.userRepo = userRepo;
     }
 
+    // GET
     public List<User> getUsers() {
         return userRepo.findAll();
     }
+
+    // POST
+    public User saveUser(User newUser) {
+        return userRepo.save(newUser);
+    }
+
+
+
+
 }
