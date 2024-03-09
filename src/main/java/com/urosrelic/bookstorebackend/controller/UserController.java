@@ -3,6 +3,7 @@ package com.urosrelic.bookstorebackend.controller;
 import com.urosrelic.bookstorebackend.entity.UserEntity;
 import com.urosrelic.bookstorebackend.model.UserModel;
 import com.urosrelic.bookstorebackend.service.UserService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,6 +13,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/users")
+@CrossOrigin
 public class UserController {
 
     private final UserService userService;
@@ -31,7 +33,7 @@ public class UserController {
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
-    @PostMapping()
+    @PostMapping
     public ResponseEntity<UserEntity> addUser(@RequestBody UserModel newUser) {
         return new ResponseEntity<>(userService.saveUser(newUser),HttpStatus.CREATED);
     }
