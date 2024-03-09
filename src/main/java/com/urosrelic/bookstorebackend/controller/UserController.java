@@ -1,6 +1,6 @@
 package com.urosrelic.bookstorebackend.controller;
 
-import com.urosrelic.bookstorebackend.entity.User;
+import com.urosrelic.bookstorebackend.entity.UserEntity;
 import com.urosrelic.bookstorebackend.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -21,8 +21,8 @@ public class UserController {
     }
 
     @GetMapping
-    public ResponseEntity<List<User>> getUsers() {
-        List<User> users = userService.getUsers();
+    public ResponseEntity<List<UserEntity>> getUsers() {
+        List<UserEntity> users = userService.getUsers();
         if(!users.isEmpty()) {
             return new ResponseEntity<>(users, HttpStatus.OK);
         }
@@ -31,8 +31,8 @@ public class UserController {
     }
 
     @PostMapping
-    public ResponseEntity<User> addUser(@RequestBody User newUser) {
-        User savedUser = userService.saveUser(newUser);
+    public ResponseEntity<UserEntity> addUser(@RequestBody UserEntity newUser) {
+        UserEntity savedUser = userService.saveUser(newUser);
         return new ResponseEntity<>(savedUser, HttpStatus.CREATED);
     }
 

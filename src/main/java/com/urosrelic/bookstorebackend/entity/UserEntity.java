@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(name = "users", schema = "book_store", catalog = "")
-public class User {
+public class UserEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "ID")
@@ -56,7 +56,7 @@ public class User {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        User that = (User) o;
+        UserEntity that = (UserEntity) o;
 
         if (id != that.id) return false;
         if (username != null ? !username.equals(that.username) : that.username != null) return false;
