@@ -1,6 +1,7 @@
 package com.urosrelic.bookstorebackend.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Size;
 import lombok.Data;
 
 
@@ -12,6 +13,7 @@ public class UserEntity {
     private Long id;
     private String username;
     private String email;
+    @Size(min = 8, max = 16, message = "Password must be between 8 and 16 characters long")
     @Column(length = 60)
     private String password;
     private String role;
