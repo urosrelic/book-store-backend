@@ -2,6 +2,7 @@ package com.urosrelic.bookstorebackend.controller;
 
 import com.urosrelic.bookstorebackend.model.User;
 import com.urosrelic.bookstorebackend.repository.UserRepo;
+import com.urosrelic.bookstorebackend.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,19 +16,22 @@ import java.util.List;
 @RequestMapping("/users")
 public class UserController {
 
-    private final UserRepo userRepo;
+    private final UserService userService;
 
     @Autowired
-    public UserController(UserRepo userRepo) {
-        this.userRepo = userRepo;
+    public UserController(UserService userService) {
+        this.userService = userService;
     }
 
     @GetMapping
     public ResponseEntity<List<User>> getUsers() {
-        List<User> users = userRepo.findAll();
-        if (!users.isEmpty()) {
+        List<User> users = userService.getUsers();
+        if(!users.isEmpty()) {
             return new ResponseEntity<>(users, HttpStatus.OK);
         }
+
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
+
+
 }
