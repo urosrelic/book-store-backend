@@ -1,7 +1,6 @@
 package com.urosrelic.bookstorebackend.controller;
 
-import com.urosrelic.bookstorebackend.model.User;
-import com.urosrelic.bookstorebackend.repository.UserRepo;
+import com.urosrelic.bookstorebackend.entity.User;
 import com.urosrelic.bookstorebackend.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

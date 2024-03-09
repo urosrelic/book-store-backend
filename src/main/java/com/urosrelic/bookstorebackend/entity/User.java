@@ -1,4 +1,4 @@
-package com.urosrelic.bookstorebackend.model;
+package com.urosrelic.bookstorebackend.entity;
 
 import jakarta.persistence.*;
 
