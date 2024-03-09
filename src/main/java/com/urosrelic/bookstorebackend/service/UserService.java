@@ -1,8 +1,10 @@
 package com.urosrelic.bookstorebackend.service;
 
 import com.urosrelic.bookstorebackend.entity.UserEntity;
+import com.urosrelic.bookstorebackend.model.UserModel;
 import com.urosrelic.bookstorebackend.repository.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -11,9 +13,12 @@ import java.util.List;
 public class UserService {
     private final UserRepo userRepo;
 
+    private final PasswordEncoder passwordEncoder;
+
     @Autowired
-    public UserService(UserRepo userRepo) {
+    public UserService(UserRepo userRepo, PasswordEncoder passwordEncoder) {
         this.userRepo = userRepo;
+        this.passwordEncoder = passwordEncoder;
     }
 
     // GET
@@ -22,8 +27,16 @@ public class UserService {
     }
 
     // POST
-    public UserEntity saveUser(UserEntity newUser) {
-        return userRepo.save(newUser);
+    public UserEntity saveUser(UserModel userModel) {
+        UserEntity user = new UserEntity();
+        user.setEmail(userModel.getEmail());
+        user.setUsername(userModel.getUsername());
+        user.setRole("USER");
+        user.setPassword(passwordEncoder.encode(userModel.getPassword()));
+
+        userRepo.save(user);
+
+        return user;
     }
 
 
