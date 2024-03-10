@@ -38,5 +38,14 @@ public class UserController {
         return new ResponseEntity<>(userService.saveUser(newUser),HttpStatus.CREATED);
     }
 
+    @GetMapping("/login")
+    public ResponseEntity<UserEntity> loginUser(@RequestBody UserModel userModel) {
+        UserEntity user = userService.loginUser(userModel);
+        if(user != null) {
+            return new ResponseEntity<>(user, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+    }
+
 
 }
