@@ -39,6 +39,18 @@ public class UserService {
         return user;
     }
 
+    // POST - Login
+    public UserEntity loginUser(UserModel userModel) {
+        // Find the user by username
+        UserEntity user = userRepo.findByUsername(userModel.getUsername());
+
+        if (user != null && passwordEncoder.matches(userModel.getPassword(), user.getPassword())) {
+            return user;
+        } else {
+            return null;
+        }
+    }
+
 
 
 
