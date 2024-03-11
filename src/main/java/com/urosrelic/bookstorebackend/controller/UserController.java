@@ -39,8 +39,9 @@ public class UserController {
     }
 
     @GetMapping("/login")
-    public ResponseEntity<UserEntity> loginUser(@RequestBody UserModel userModel) {
-        UserEntity user = userService.loginUser(userModel);
+    public ResponseEntity<UserEntity> loginUser( @RequestParam(name = "username") String username,
+                                                 @RequestParam(name = "password") String password) {
+        UserEntity user = userService.loginUser(username, password);
         if(user != null) {
             return new ResponseEntity<>(user, HttpStatus.OK);
         }
