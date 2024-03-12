@@ -2,6 +2,7 @@ package com.urosrelic.bookstorebackend.controller;
 
 import com.urosrelic.bookstorebackend.entity.UserEntity;
 import com.urosrelic.bookstorebackend.model.UserModel;
+import com.urosrelic.bookstorebackend.service.AuthService;
 import com.urosrelic.bookstorebackend.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,20 +34,7 @@ public class UserController {
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
-    @PostMapping
-    public ResponseEntity<UserEntity> addUser(@RequestBody UserModel newUser) {
-        return new ResponseEntity<>(userService.saveUser(newUser),HttpStatus.CREATED);
-    }
 
-    @GetMapping("/login")
-    public ResponseEntity<UserEntity> loginUser( @RequestParam(name = "username") String username,
-                                                 @RequestParam(name = "password") String password) {
-        UserEntity user = userService.loginUser(username, password);
-        if(user != null) {
-            return new ResponseEntity<>(user, HttpStatus.OK);
-        }
-        return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
-    }
 
 
 }
