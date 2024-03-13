@@ -1,7 +1,6 @@
 package com.urosrelic.bookstorebackend.service;
 
 import com.urosrelic.bookstorebackend.entity.UserEntity;
-import com.urosrelic.bookstorebackend.model.UserModel;
 import com.urosrelic.bookstorebackend.repository.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;

@@ -1,7 +1,6 @@
 package com.urosrelic.bookstorebackend.entity;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Size;
 import lombok.Data;
 
 
