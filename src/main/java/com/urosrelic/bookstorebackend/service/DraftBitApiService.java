@@ -16,13 +16,11 @@ public class DraftBitApiService {
     private final String apiUrl = "https://example-data.draftbit.com/books?_limit=50";
     private final RestTemplate restTemplate;
     private final Gson gson;
-    private final BookRepo bookRepo;
 
     @Autowired
-    public DraftBitApiService(RestTemplate restTemplate, Gson gson, BookRepo bookRepo) {
+    public DraftBitApiService(RestTemplate restTemplate, Gson gson) {
         this.restTemplate = restTemplate;
         this.gson = gson;
-        this.bookRepo = bookRepo;
     }
 
     public List<BookEntity> getDataFromApi() {
