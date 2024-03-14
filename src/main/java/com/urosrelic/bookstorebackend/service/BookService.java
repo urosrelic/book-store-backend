@@ -4,6 +4,7 @@ import com.urosrelic.bookstorebackend.entity.BookEntity;
 import com.urosrelic.bookstorebackend.repository.BookRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
@@ -22,7 +23,8 @@ public class BookService {
         bookRepo.saveAll(books);
     }
 
-    public Page<BookEntity> getBooks(Pageable pageable) {
+    public Page<BookEntity> getBooks(Integer page, Integer size) {
+        Pageable pageable = PageRequest.of(page, size);
         return bookRepo.findAll(pageable);
     }
 }

@@ -4,10 +4,16 @@ import com.urosrelic.bookstorebackend.entity.BookEntity;
 import com.urosrelic.bookstorebackend.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/books")
@@ -20,7 +26,10 @@ public class BookController {
     }
 
     @GetMapping
-    public Page<BookEntity> getBooks(Pageable pageable) {
-        return bookService.getBooks(pageable);
+    public Page<BookEntity> getBooks(
+            @RequestParam(name = "page", defaultValue = "0") Integer page,
+            @RequestParam(name = "size", defaultValue = "10") Integer size
+    ) {
+        return bookService.getBooks(page, size);
     }
 }
