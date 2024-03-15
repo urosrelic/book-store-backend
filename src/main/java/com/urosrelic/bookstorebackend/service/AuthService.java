@@ -1,6 +1,7 @@
 package com.urosrelic.bookstorebackend.service;
 
 import com.urosrelic.bookstorebackend.entity.UserEntity;
+import com.urosrelic.bookstorebackend.exceptions.UserAlreadyExistsException;
 import com.urosrelic.bookstorebackend.model.UserModel;
 import com.urosrelic.bookstorebackend.repository.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +20,16 @@ public class AuthService {
         this.passwordEncoder = passwordEncoder;
     }
 
-    public UserEntity saveUser(UserModel userModel) {
+    public UserEntity saveUser(UserModel userModel) throws UserAlreadyExistsException {
+
+        if (userRepo.findByUsername(userModel.getUsername()) != null) {
+            throw new UserAlreadyExistsException("Username already exists");
+        }
+
+        if (userRepo.findByEmail(userModel.getEmail()) != null) {
+            throw new UserAlreadyExistsException("Email already exists");
+        }
+
         UserEntity user = new UserEntity();
         user.setEmail(userModel.getEmail());
         user.setUsername(userModel.getUsername());

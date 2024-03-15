@@ -1,6 +1,7 @@
 package com.urosrelic.bookstorebackend.controller;
 
 import com.urosrelic.bookstorebackend.entity.UserEntity;
+import com.urosrelic.bookstorebackend.exceptions.UserAlreadyExistsException;
 import com.urosrelic.bookstorebackend.model.UserModel;
 import com.urosrelic.bookstorebackend.service.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,8 +20,12 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<UserEntity> addUser(@RequestBody UserModel newUser) {
-        return new ResponseEntity<>(authService.saveUser(newUser), HttpStatus.CREATED);
+    public ResponseEntity<?> addUser(@RequestBody UserModel newUser) {
+        try {
+            return new ResponseEntity<>(authService.saveUser(newUser), HttpStatus.CREATED);
+        } catch (UserAlreadyExistsException e) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(e.getMessage());
+        }
     }
 
     @GetMapping("/login")
