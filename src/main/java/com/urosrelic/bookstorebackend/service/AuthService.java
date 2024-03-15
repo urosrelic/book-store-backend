@@ -2,6 +2,8 @@ package com.urosrelic.bookstorebackend.service;
 
 import com.urosrelic.bookstorebackend.entity.UserEntity;
 import com.urosrelic.bookstorebackend.exceptions.UserAlreadyExistsException;
+import com.urosrelic.bookstorebackend.exceptions.WrongPasswordException;
+import com.urosrelic.bookstorebackend.exceptions.WrongUsernamException;
 import com.urosrelic.bookstorebackend.model.UserModel;
 import com.urosrelic.bookstorebackend.repository.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,14 +43,18 @@ public class AuthService {
         return user;
     }
 
-    public UserEntity loginUser(String username, String password) {
+    public UserEntity loginUser(String username, String password) throws WrongUsernamException, WrongPasswordException {
         // Find the user by username
         UserEntity user = userRepo.findByUsername(username);
 
-        if (user != null && passwordEncoder.matches(password, user.getPassword())) {
+        if(user == null) {
+            throw new WrongUsernamException();
+        }
+
+        if (passwordEncoder.matches(password, user.getPassword())) {
             return user;
         } else {
-            return null;
+            throw new WrongPasswordException();
         }
     }
 }

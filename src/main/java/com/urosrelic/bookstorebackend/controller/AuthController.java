@@ -2,6 +2,8 @@ package com.urosrelic.bookstorebackend.controller;
 
 import com.urosrelic.bookstorebackend.entity.UserEntity;
 import com.urosrelic.bookstorebackend.exceptions.UserAlreadyExistsException;
+import com.urosrelic.bookstorebackend.exceptions.WrongPasswordException;
+import com.urosrelic.bookstorebackend.exceptions.WrongUsernamException;
 import com.urosrelic.bookstorebackend.model.UserModel;
 import com.urosrelic.bookstorebackend.service.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,12 +31,13 @@ public class AuthController {
     }
 
     @GetMapping("/login")
-    public ResponseEntity<UserEntity> loginUser( @RequestParam(name = "username") String username,
+    public ResponseEntity<?> loginUser( @RequestParam(name = "username") String username,
                                                  @RequestParam(name = "password") String password) {
-        UserEntity user = authService.loginUser(username, password);
-        if(user != null) {
-            return new ResponseEntity<>(user, HttpStatus.OK);
+        try {
+            UserEntity user = authService.loginUser(username, password);
+            return ResponseEntity.ok(user);
+        } catch (WrongUsernamException | WrongPasswordException e) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(e.getMessage());
         }
-        return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
     }
 }
