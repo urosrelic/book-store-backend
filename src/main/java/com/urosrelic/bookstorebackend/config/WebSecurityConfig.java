@@ -14,13 +14,10 @@ import org.springframework.security.web.SecurityFilterChain;
 public class WebSecurityConfig {
 
     private static final String[] WHITELIST_URLS = {
-            "/users",
-            "/auth/register",
-            "/auth/login",
-            "/api",
-            "/api/getData",
-            "/api/insertData",
-            "/books"
+            "/users/**",
+            "/auth/**",
+            "/api/**",
+            "/books/**"
 
     };
 
