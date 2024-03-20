@@ -44,4 +44,10 @@ public class BookController {
     public Set<String> getGenres() {
         return bookService.getGenres();
     }
+
+    @GetMapping("/genre/{genre}")
+    public ResponseEntity<?> getFilteredBooksByGenre(@PathVariable("genre") String genre) {
+        List<BookEntity> books = bookService.getFilteredBooksByGenre(genre);
+        return ResponseEntity.ok(books);
+    }
 }

@@ -29,6 +29,10 @@ public class BookService {
         return bookRepo.findAll(pageable);
     }
 
+    public List<BookEntity> getFilteredBooksByGenre(String genre) {
+        return bookRepo.findByGenreListContaining(genre);
+    }
+
     public BookEntity getBookData(Integer bookId) throws BookNotFoundException {
         Optional<BookEntity> book = bookRepo.findById(bookId);
         if(book.isPresent()) {
