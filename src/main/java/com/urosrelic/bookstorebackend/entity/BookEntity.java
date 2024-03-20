@@ -6,6 +6,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Random;
+
 @Entity
 @Data
 @NoArgsConstructor
@@ -50,4 +52,23 @@ public class BookEntity {
     private Integer reviewCount;
 
     private String title;
+
+    private Double price;
+
+    // Generate a random price ending with .99 within a specified range
+    public Double generateRandomPrice() {
+        double minPrice = 10.0;
+        double maxPrice = 100.0;
+
+        Random random = new Random();
+        double randomPrice = minPrice + (maxPrice - minPrice) * random.nextDouble();
+
+        randomPrice = Math.round(randomPrice);
+
+        randomPrice += 0.99;
+
+        return randomPrice;
+    }
+
+
 }

@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -30,7 +31,12 @@ public class ApiController {
     @PostMapping("/insertData")
     public ResponseEntity<Void> insertDataFromApi() {
         List<BookEntity> fetchedData = draftBitApiService.getDataFromApi();
-        bookService.insertBooks(fetchedData);
+        List<BookEntity> booksWithUpdatedPrices = new ArrayList<>();
+        for (BookEntity book : fetchedData) {
+            book.setPrice(book.generateRandomPrice());
+            booksWithUpdatedPrices.add(book);
+        }
+        bookService.insertBooks(booksWithUpdatedPrices);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 }
