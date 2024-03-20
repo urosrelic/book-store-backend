@@ -9,8 +9,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class BookService {
@@ -37,6 +36,16 @@ public class BookService {
         } else {
             throw new BookNotFoundException("Book not found with ID: " + bookId);
         }
+    }
+
+    public Set<String> getGenres() {
+        List<BookEntity> books = bookRepo.findAll();
+        Set<String> genresList = new HashSet<>();
+        for(BookEntity book : books) {
+            String[] genres = book.getGenreList().split(",");
+            genresList.addAll(Arrays.asList(genres));
+        }
+        return genresList;
     }
 
 }

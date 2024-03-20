@@ -9,6 +9,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+import java.util.Set;
+
 @RestController
 @RequestMapping("/books")
 public class BookController {
@@ -35,5 +38,10 @@ public class BookController {
         } catch (BookNotFoundException e) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(e.getMessage());
         }
+    }
+
+    @GetMapping("/genres")
+    public Set<String> getGenres() {
+        return bookService.getGenres();
     }
 }
