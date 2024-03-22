@@ -1,6 +1,6 @@
 package com.urosrelic.bookstorebackend.controller;
 
-import com.urosrelic.bookstorebackend.entity.BookEntity;
+import com.urosrelic.bookstorebackend.entity.Book;
 import com.urosrelic.bookstorebackend.service.BookService;
 import com.urosrelic.bookstorebackend.service.DraftBitApiService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,15 +24,15 @@ public class ApiController {
     }
 
     @GetMapping("/getData")
-    public List<BookEntity> getDataFromApi() {
+    public List<Book> getDataFromApi() {
         return draftBitApiService.getDataFromApi();
     }
 
     @PostMapping("/insertData")
     public ResponseEntity<Void> insertDataFromApi() {
-        List<BookEntity> fetchedData = draftBitApiService.getDataFromApi();
-        List<BookEntity> booksWithUpdatedPrices = new ArrayList<>();
-        for (BookEntity book : fetchedData) {
+        List<Book> fetchedData = draftBitApiService.getDataFromApi();
+        List<Book> booksWithUpdatedPrices = new ArrayList<>();
+        for (Book book : fetchedData) {
             book.setPrice(book.generateRandomPrice());
             booksWithUpdatedPrices.add(book);
         }

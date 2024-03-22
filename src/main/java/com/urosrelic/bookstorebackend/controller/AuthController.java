@@ -1,6 +1,6 @@
 package com.urosrelic.bookstorebackend.controller;
 
-import com.urosrelic.bookstorebackend.entity.UserEntity;
+import com.urosrelic.bookstorebackend.entity.User;
 import com.urosrelic.bookstorebackend.exceptions.UserAlreadyExistsException;
 import com.urosrelic.bookstorebackend.exceptions.WrongPasswordException;
 import com.urosrelic.bookstorebackend.exceptions.WrongUsernamException;
@@ -34,7 +34,7 @@ public class AuthController {
     public ResponseEntity<?> loginUser( @RequestParam(name = "username") String username,
                                                  @RequestParam(name = "password") String password) {
         try {
-            UserEntity user = authService.loginUser(username, password);
+            User user = authService.loginUser(username, password);
             return ResponseEntity.ok(user);
         } catch (WrongUsernamException | WrongPasswordException e) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(e.getMessage());

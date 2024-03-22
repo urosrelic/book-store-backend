@@ -12,7 +12,7 @@ import java.util.Random;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class BookEntity {
+public class Book {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long bookId;

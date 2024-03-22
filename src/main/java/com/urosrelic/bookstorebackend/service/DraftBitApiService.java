@@ -2,8 +2,7 @@ package com.urosrelic.bookstorebackend.service;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.urosrelic.bookstorebackend.entity.BookEntity;
-import com.urosrelic.bookstorebackend.repository.BookRepo;
+import com.urosrelic.bookstorebackend.entity.Book;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -23,11 +22,11 @@ public class DraftBitApiService {
         this.gson = gson;
     }
 
-    public List<BookEntity> getDataFromApi() {
+    public List<Book> getDataFromApi() {
         String jsonResponse = restTemplate.getForObject(apiUrl, String.class);
 
         // Define the type of the expected list using TypeToken
-        Type listType = new TypeToken<List<BookEntity>>(){}.getType();
+        Type listType = new TypeToken<List<Book>>(){}.getType();
 
         // Deserialize JSON array into a list of BookEntity objects
         return gson.fromJson(jsonResponse, listType);

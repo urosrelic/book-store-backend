@@ -1,9 +1,11 @@
 package com.urosrelic.bookstorebackend.repository;
 
-import com.urosrelic.bookstorebackend.entity.UserEntity;
+import com.urosrelic.bookstorebackend.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-public interface UserRepo extends JpaRepository<UserEntity, Integer> {
-    UserEntity findByEmail(String email);
-    UserEntity findByUsername(String username);
+@Repository
+public interface UserRepo extends JpaRepository<User, Long> {
+    User findByEmail(String email);
+    User findByUsername(String username);
 }

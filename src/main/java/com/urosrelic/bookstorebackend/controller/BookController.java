@@ -1,6 +1,6 @@
 package com.urosrelic.bookstorebackend.controller;
 
-import com.urosrelic.bookstorebackend.entity.BookEntity;
+import com.urosrelic.bookstorebackend.entity.Book;
 import com.urosrelic.bookstorebackend.exceptions.BookNotFoundException;
 import com.urosrelic.bookstorebackend.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +23,7 @@ public class BookController {
     }
 
     @GetMapping
-    public Page<BookEntity> getBooks(
+    public Page<Book> getBooks(
             @RequestParam(name = "page", defaultValue = "0") Integer page,
             @RequestParam(name = "size", defaultValue = "10") Integer size
     ) {
@@ -31,10 +31,10 @@ public class BookController {
     }
 
     @GetMapping("/book/{book_id}")
-    public ResponseEntity<?> getBookData(@PathVariable("book_id") Integer bookId) {
+    public ResponseEntity<?> getBookData(@PathVariable("book_id") Long bookId) {
         try {
-            BookEntity bookEntity = bookService.getBookData(bookId);
-            return ResponseEntity.ok(bookEntity);
+            Book book = bookService.getBookData(bookId);
+            return ResponseEntity.ok(book);
         } catch (BookNotFoundException e) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(e.getMessage());
         }
@@ -47,7 +47,7 @@ public class BookController {
 
     @GetMapping("/genre/{genre}")
     public ResponseEntity<?> getFilteredBooksByGenre(@PathVariable("genre") String genre) {
-        List<BookEntity> books = bookService.getFilteredBooksByGenre(genre);
+        List<Book> books = bookService.getFilteredBooksByGenre(genre);
         return ResponseEntity.ok(books);
     }
 }
