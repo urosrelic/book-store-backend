@@ -1,6 +1,6 @@
 package com.urosrelic.bookstorebackend.service;
 
-import com.urosrelic.bookstorebackend.entity.BookEntity;
+import com.urosrelic.bookstorebackend.entity.Book;
 import com.urosrelic.bookstorebackend.exceptions.BookNotFoundException;
 import com.urosrelic.bookstorebackend.repository.BookRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,21 +20,21 @@ public class BookService {
         this.bookRepo = bookRepo;
     }
 
-    public void insertBooks(List<BookEntity> books) {
+    public void insertBooks(List<Book> books) {
         bookRepo.saveAll(books);
     }
 
-    public Page<BookEntity> getBooks(Integer page, Integer size) {
+    public Page<Book> getBooks(Integer page, Integer size) {
         Pageable pageable = PageRequest.of(page, size);
         return bookRepo.findAll(pageable);
     }
 
-    public List<BookEntity> getFilteredBooksByGenre(String genre) {
+    public List<Book> getFilteredBooksByGenre(String genre) {
         return bookRepo.findByGenreListContaining(genre);
     }
 
-    public BookEntity getBookData(Integer bookId) throws BookNotFoundException {
-        Optional<BookEntity> book = bookRepo.findById(bookId);
+    public Book getBookData(Long bookId) throws BookNotFoundException {
+        Optional<Book> book = bookRepo.findById(bookId);
         if(book.isPresent()) {
             return book.get();
         } else {
@@ -43,9 +43,9 @@ public class BookService {
     }
 
     public Set<String> getGenres() {
-        List<BookEntity> books = bookRepo.findAll();
+        List<Book> books = bookRepo.findAll();
         Set<String> genresList = new HashSet<>();
-        for(BookEntity book : books) {
+        for(Book book : books) {
             String[] genres = book.getGenreList().split(",");
             genresList.addAll(Arrays.asList(genres));
         }

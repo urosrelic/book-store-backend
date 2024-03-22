@@ -1,6 +1,6 @@
 package com.urosrelic.bookstorebackend.service;
 
-import com.urosrelic.bookstorebackend.entity.UserEntity;
+import com.urosrelic.bookstorebackend.entity.User;
 import com.urosrelic.bookstorebackend.repository.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -21,7 +21,7 @@ public class UserService {
     }
 
     // GET
-    public List<UserEntity> getUsers() {
+    public List<User> getUsers() {
         return userRepo.findAll();
     }
 

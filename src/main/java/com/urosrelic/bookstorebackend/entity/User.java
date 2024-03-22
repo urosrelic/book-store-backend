@@ -3,10 +3,12 @@ package com.urosrelic.bookstorebackend.entity;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.util.List;
+
 
 @Entity
 @Data
-public class UserEntity {
+public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long userId;
@@ -17,4 +19,5 @@ public class UserEntity {
     @Column(length = 60)
     private String password;
     private String role;
+
 }
