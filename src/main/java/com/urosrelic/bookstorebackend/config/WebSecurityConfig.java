@@ -19,7 +19,7 @@ public class WebSecurityConfig {
             "/api/**",
             "/books/**",
             "/books/genre/**",
-            "/order/**",
+            "/purchases/**",
 
 
     };
