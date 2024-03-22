@@ -1,9 +1,11 @@
 package com.urosrelic.bookstorebackend.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 @Data
@@ -18,10 +20,12 @@ public class Purchase {
     private User user;
 
     @OneToMany(mappedBy = "purchase", cascade = CascadeType.ALL)
-    @JsonIgnore
+    @JsonManagedReference     //    Resolves serialization error
     private List<PurchaseItem> purchaseItems;
 
     private Double subtotalAmount;
     private Double tax;
     private Double totalAmount;
+
+    private Timestamp date;
 }

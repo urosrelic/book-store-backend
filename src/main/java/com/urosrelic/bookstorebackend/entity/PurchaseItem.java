@@ -1,5 +1,6 @@
 package com.urosrelic.bookstorebackend.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -12,6 +13,7 @@ public class PurchaseItem {
 
     @ManyToOne
     @JoinColumn(name = "purchase_id")
+    @JsonBackReference  //    Resolves serialization error
     private Purchase purchase;
 
     @ManyToOne
