@@ -15,7 +15,7 @@ Online book library where users can buy books and see detailed information about
 - CSS
 - Material UI
 
-You can find the frontend project code [here](https://github.com/urosrelic/book-store-backend).
+You can find the frontend project code [here](https://github.com/urosrelic/book-store-frontend).
 
 
 ## Run Locally
