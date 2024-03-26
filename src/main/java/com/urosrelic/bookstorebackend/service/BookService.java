@@ -52,4 +52,8 @@ public class BookService {
         return genresList;
     }
 
+    public boolean existsByTitle(String title) {
+        return bookRepo.existsByTitle(title);
+    }
+
 }

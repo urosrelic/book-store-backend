@@ -33,10 +33,20 @@ public class ApiController {
         List<Book> fetchedData = draftBitApiService.getDataFromApi();
         List<Book> booksWithUpdatedPrices = new ArrayList<>();
         for (Book book : fetchedData) {
-            book.setPrice(book.generateRandomPrice());
-            booksWithUpdatedPrices.add(book);
+            // Check if the book already exists in the database based on some unique identifier
+            if (!bookService.existsByTitle(book.getTitle())) {
+                // If the book doesn't exist, generate a random price and add it to the list
+                book.setPrice(book.generateRandomPrice());
+                booksWithUpdatedPrices.add(book);
+            }
         }
-        bookService.insertBooks(booksWithUpdatedPrices);
-        return ResponseEntity.status(HttpStatus.CREATED).build();
+        // Insert only the books that are not already in the database
+        if (!booksWithUpdatedPrices.isEmpty()) {
+            bookService.insertBooks(booksWithUpdatedPrices);
+            return ResponseEntity.status(HttpStatus.CREATED).build();
+        } else {
+            return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+        }
     }
+
 }
