@@ -18,7 +18,6 @@ public class PurchaseController {
 
     private final PurchaseService purchaseService;
 
-    @Autowired
     public PurchaseController(PurchaseService purchaseService) {
         this.purchaseService = purchaseService;
     }

@@ -14,7 +14,6 @@ public class UserService {
 
     private final PasswordEncoder passwordEncoder;
 
-    @Autowired
     public UserService(UserRepo userRepo, PasswordEncoder passwordEncoder) {
         this.userRepo = userRepo;
         this.passwordEncoder = passwordEncoder;
@@ -24,11 +23,5 @@ public class UserService {
     public List<User> getUsers() {
         return userRepo.findAll();
     }
-
-    // POST
-
-
-
-
 
 }

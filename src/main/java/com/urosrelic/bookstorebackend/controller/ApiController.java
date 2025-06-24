@@ -17,7 +17,6 @@ public class ApiController {
     private final DraftBitApiService draftBitApiService;
     private final BookService bookService;
 
-    @Autowired
     public ApiController(DraftBitApiService draftBitApiService, BookService bookService) {
         this.draftBitApiService = draftBitApiService;
         this.bookService = bookService;
