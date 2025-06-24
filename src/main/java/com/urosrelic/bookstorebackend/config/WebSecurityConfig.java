@@ -20,8 +20,6 @@ public class WebSecurityConfig {
             "/books/**",
             "/books/genre/**",
             "/purchases/**",
-
-
     };
 
     @Bean
